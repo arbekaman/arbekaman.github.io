@@ -4,4 +4,4 @@
 - terra-motors.png
 - air-astana.png
 - kz-choreography.png
-- astana-inert.png: пока нет, на сайте показываются инициалы AI
+- astana-inert.png: настоящего логотипа нет, на сайте нейтральная иконка стройки (inline SVG в index.html)
