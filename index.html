@@ -5,387 +5,464 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Арбек Аман · Резюме</title>
 <meta name="description" content="Арбек Аман, системный администратор. Windows Server, Active Directory, FortiGate, FortiMail, MikroTik, Zabbix. Астана.">
+<meta property="og:title" content="Арбек Аман, системный администратор">
+<meta property="og:description" content="Windows Server, Active Directory, FortiGate, FortiMail, MikroTik, Zabbix. Астана, Казахстан.">
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://arbekaman.github.io/">
+<meta property="og:image" content="https://arbekaman.github.io/assets/photo.jpg">
+<meta name="theme-color" content="#F2F4F3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='3' y='2' width='26' height='28' rx='3' fill='%2322292D'/%3E%3Crect x='7' y='6' width='18' height='5' rx='1' fill='%232E373C'/%3E%3Crect x='7' y='13.5' width='18' height='5' rx='1' fill='%232E373C'/%3E%3Crect x='7' y='21' width='18' height='5' rx='1' fill='%232E373C'/%3E%3Ccircle cx='22' cy='8.5' r='1.6' fill='%233DDC84'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#ffffff; --side:#f6f7f9; --text:#14181f; --muted:#5d6876; --soft:#8b95a3;
-    --line:#e5e8ec; --accent:#0b4f8a; --accent-soft:#e8f0f8;
+    --paper:#F2F4F3;
+    --ink:#1B2227;
+    --muted:#5E6A70;
+    --line:#D6DCDD;
+    --fibre:#12A4B0;      /* aqua, как оболочка многомодовой оптики: декоративные элементы */
+    --fibre-ink:#0B6F79;  /* тот же оттенок, но с контрастом для текста */
+    --rack:#22292D;
+    --plate:#2E373C;
+    --plate-hi:#39444A;
+    --led:#3DDC84;
+    --accent:var(--fibre-ink);
+    --display:"Unbounded",system-ui,sans-serif;
+    --text:"Golos Text",system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15.5px;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{font-family:var(--text);font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
   body[data-lang="ru"] .en, body[data-lang="en"] .ru{display:none !important}
   a{color:inherit}
+  :focus-visible{outline:2px solid var(--fibre-ink);outline-offset:3px;border-radius:3px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 32px}
 
-  .layout{display:grid;grid-template-columns:340px 1fr;min-height:100vh}
+  /* ---------- controls ---------- */
+  .controls{display:flex;justify-content:flex-end;gap:10px;padding:22px 0 0}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff}
+  .lang button{border:0;background:none;font:500 13px var(--text);color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer}
+  .lang button.on{background:var(--ink);color:#fff}
+  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;font:500 13px var(--text);color:var(--ink);cursor:pointer}
+  .btn:hover{border-color:var(--fibre-ink);color:var(--fibre-ink)}
+  .btn svg{width:15px;height:15px}
 
-  /* sidebar */
-  .side{background:var(--side);border-right:1px solid var(--line);padding:56px 40px 40px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column}
-  .mono{width:64px;height:64px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font:600 22px "Source Serif 4",serif;letter-spacing:.02em}
-  .name{font:600 30px/1.15 "Source Serif 4",Georgia,serif;margin-top:22px;letter-spacing:-.005em}
-  .title{color:var(--accent);font-weight:600;margin-top:8px;font-size:15px}
-  .sub{color:var(--muted);font-size:14px;margin-top:4px}
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:72px;align-items:start;padding:40px 0 88px}
+  .who{padding-top:28px}
+  .photo{width:112px;height:112px;border-radius:20px;object-fit:cover;display:block;background:#dfe4e5}
+  h1{font:500 clamp(40px,5.4vw,60px)/1.02 var(--display);letter-spacing:-.025em;margin-top:30px}
+  .role{font:500 19px/1.4 var(--text);margin-top:16px}
+  .intro{color:#36424a;font-size:17px;line-height:1.65;max-width:58ch;margin-top:18px}
+  .links{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:30px;font-size:15px}
+  .links a{text-decoration:none;border-bottom:1.5px solid var(--fibre);padding-bottom:1px}
+  .links a:hover{color:var(--fibre-ink)}
+  .links .place{color:var(--muted)}
 
-  .block{margin-top:34px}
-  .label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin-bottom:12px}
-  .contacts{list-style:none;display:flex;flex-direction:column;gap:10px;font-size:14px}
-  .contacts li{display:flex;gap:10px;align-items:flex-start}
-  .contacts svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--soft)}
-  .contacts a{text-decoration:none;border-bottom:1px solid transparent}
-  .contacts a:hover{border-color:var(--accent);color:var(--accent)}
+  /* ---------- rack ---------- */
+  .rack{background:var(--rack);border-radius:10px;padding:18px 0;box-shadow:0 30px 60px -30px rgba(27,34,39,.45)}
+  .rack-in{display:grid;grid-template-columns:22px minmax(0,1fr) 22px;height:540px}
+  .rail{background:
+          radial-gradient(circle at 50% 50%, #0f1316 0 2.6px, transparent 3.1px) 0 0/22px 18px repeat-y;
+        }
+  .bay{display:flex;flex-direction:column;gap:6px;padding:0 6px;min-height:0}
+  .device{
+    --i:0;
+    position:relative;flex:var(--m) 1 0;min-height:62px;display:flex;align-items:center;gap:14px;
+    padding:10px 14px;border-radius:4px;text-decoration:none;color:#E6ECEE;
+    background:
+      linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,0) 40%),
+      var(--plate);
+    border:1px solid #3a454b;
+    animation:rackin .55s cubic-bezier(.2,.75,.25,1) both;animation-delay:calc(var(--i) * 120ms + 150ms);
+  }
+  .device:hover{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,0) 40%),var(--plate-hi)}
+  .device::before,.device::after{ /* крепёжные винты */
+    content:"";position:absolute;left:5px;width:5px;height:5px;border-radius:50%;background:#59656b;box-shadow:inset 0 0 0 1px #1e2427
+  }
+  .device::before{top:6px} .device::after{bottom:6px}
+  .tag{flex:none;width:40px;height:40px;border-radius:3px;background:#fff;display:grid;place-items:center;overflow:hidden}
+  .tag img{width:36px;height:36px;object-fit:contain}
+  .tag svg{width:26px;height:26px;color:var(--fibre-ink)}
+  .dev-text{min-width:0;flex:1}
+  .dev-name{display:block;font:500 14px/1.25 var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dev-meta{display:block;font-size:12.5px;color:#9AA6AC;line-height:1.3;margin-top:2px}
+  .vents{flex:none;align-self:stretch;width:44px;border-radius:2px;
+    background:repeating-linear-gradient(90deg,#1c2225 0 3px,transparent 3px 7px);opacity:.75}
+  .led{flex:none;width:9px;height:9px;border-radius:50%;background:#46525a;box-shadow:inset 0 0 0 1px #1a1f22}
+  .device.live .led{background:var(--led);box-shadow:0 0 0 3px rgba(61,220,132,.18),0 0 12px rgba(61,220,132,.7)}
+  .rack-cap{display:flex;justify-content:space-between;align-items:center;color:#8E9AA0;font-size:12.5px;padding:14px 28px 0}
+  .rack-cap b{font-weight:500;color:#C9D2D5}
+  .legend{display:flex;gap:16px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:7px;height:7px;border-radius:50%;display:inline-block;background:#46525a}
+  .legend i.on{background:var(--led)}
+  @keyframes rackin{from{transform:translateX(26px);opacity:0}to{transform:none;opacity:1}}
+  @media (prefers-reduced-motion: reduce){ .device{animation:none} html{scroll-behavior:auto} }
 
-  .nav{list-style:none;display:flex;flex-direction:column;gap:2px}
-  .nav a{display:block;padding:6px 0;text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
-  .nav a:hover,.nav a.active{color:var(--text)}
-  .nav a.active::before{content:"";display:inline-block;width:14px;height:2px;background:var(--accent);vertical-align:middle;margin-right:8px}
+  /* ---------- sections ---------- */
+  section{padding:76px 0}
+  section + section{border-top:1px solid var(--line)}
+  h2{font:500 26px/1.2 var(--display);letter-spacing:-.015em;margin-bottom:40px}
 
-  .side-foot{margin-top:auto;padding-top:34px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-  .lang{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#fff}
-  .lang button{background:none;border:0;padding:6px 12px;font:600 12px Inter,sans-serif;color:var(--muted);cursor:pointer}
-  .lang button.on{background:var(--text);color:#fff}
-  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:6px;padding:6px 12px;font:500 13px Inter,sans-serif;color:var(--text);cursor:pointer}
-  .btn:hover{border-color:var(--accent);color:var(--accent)}
-  .btn svg{width:14px;height:14px}
-
-  /* content */
-  .content{padding:56px 72px 40px;max-width:900px}
-  section{padding:0 0 52px}
-  section + section{padding-top:44px;border-top:1px solid var(--line)}
-  h2{font:600 22px "Source Serif 4",Georgia,serif;margin-bottom:24px;letter-spacing:-.005em}
-  .lead{font-size:17px;color:#2a313c;max-width:680px}
-  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:30px;border:1px solid var(--line);border-radius:8px}
-  .fact{padding:18px 22px}
-  .fact + .fact{border-left:1px solid var(--line)}
-  .fact b{display:block;font:600 26px "Source Serif 4",serif;color:var(--accent)}
-  .fact span{font-size:13px;color:var(--muted)}
-
-  .job{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:22px 0}
+  .job{display:grid;grid-template-columns:270px minmax(0,1fr);gap:48px;padding:34px 0;scroll-margin-top:24px}
+  .job:first-of-type{padding-top:0}
   .job + .job{border-top:1px solid var(--line)}
-  .when{font-size:13px;color:var(--muted);padding-top:3px;font-variant-numeric:tabular-nums}
-  .badge{display:inline-block;margin-top:6px;font-size:11px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:2px 8px;border-radius:4px;letter-spacing:.02em}
-  .job h3{font-size:16.5px;font-weight:600;line-height:1.4}
-  .co{color:var(--muted);font-size:14.5px;margin-top:2px}
-  .job ul{margin-top:12px;padding-left:18px;color:#2f3742}
-  .job li{margin:5px 0}
-  .job li::marker{color:var(--soft)}
-  .ach{margin-top:14px}
-  .ach .k{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
-  .ach ul{margin-top:6px}
-  .stack{margin-top:12px;font-size:13px;color:var(--muted)}
-  .stack b{font-weight:600;color:var(--text)}
+  .org{display:flex;gap:14px;align-items:flex-start}
+  .org .tag{width:48px;height:48px;border:1px solid var(--line);border-radius:8px}
+  .org .tag img{width:42px;height:42px}
+  .org-name{font-weight:600;line-height:1.35}
+  .org-when{color:var(--muted);font-size:14.5px;margin-top:3px}
+  .now{display:inline-flex;align-items:center;gap:7px;font-size:13.5px;color:#1f7a4b;margin-top:8px}
+  .now i{width:8px;height:8px;border-radius:50%;background:var(--led);box-shadow:0 0 0 3px rgba(61,220,132,.2)}
+  .job h3{font:600 18px/1.4 var(--text);max-width:52ch}
+  .job ul{margin-top:12px;padding-left:20px;max-width:68ch;color:#2f3a41}
+  .job li{margin:6px 0;padding-left:2px}
+  .job li::marker{color:var(--fibre)}
+  .res{margin-top:20px}
+  .res h4{font:600 15px var(--text);color:var(--fibre-ink)}
+  .res ul{margin-top:6px}
+  .stack{margin-top:18px;font-size:14.5px;color:var(--muted);max-width:68ch}
 
+  .skills{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:34px 64px}
+  .skills h3{font:600 16px var(--text);margin-bottom:6px}
+  .skills p{color:#2f3a41;max-width:48ch}
+  .adv{text-decoration:underline;text-decoration-color:var(--fibre);text-decoration-thickness:2px;text-underline-offset:4px}
+  .note{margin-top:30px;font-size:14.5px;color:var(--muted)}
 
-  .jhead{display:flex;gap:14px;align-items:flex-start}
-  .clogo{position:relative;flex:none;width:48px;height:48px;border:1px solid var(--line);border-radius:8px;background:#fff;display:grid;place-items:center;overflow:hidden;font:600 13px Inter,sans-serif;color:var(--muted);letter-spacing:.02em}
-  .clogo-icon{color:var(--accent)}
-  .clogo-icon svg{width:30px;height:30px}
-  .clogo img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:2px;background:#fff}
-  @media print{ .clogo{width:34px;height:34px;font-size:10px} }
-  .skills{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 48px}
-  .skills h4{font-size:14px;font-weight:600;margin-bottom:6px}
-  .skills p{font-size:14.5px;color:#2f3742}
-  .skills .adv{font-weight:600;color:var(--accent)}
-  .note{font-size:13px;color:var(--muted);margin-top:22px}
+  .edu{display:grid;grid-template-columns:270px minmax(0,1fr);gap:48px;padding:14px 0}
+  .edu .y{color:var(--muted)}
+  .edu h3{font:600 16px/1.45 var(--text)}
+  .edu p{color:var(--muted);font-size:15px}
+  .focus{margin-top:44px;display:grid;grid-template-columns:270px minmax(0,1fr);gap:48px}
+  .focus h3{font:600 16px var(--text)}
+  .focus p{max-width:60ch;color:#2f3a41}
 
-  .edu{display:grid;grid-template-columns:150px 1fr;gap:28px;padding:10px 0}
-  .edu .when{padding-top:1px}
-  .edu h3{font-size:15.5px;font-weight:600}
-  .edu p{color:var(--muted);font-size:14.5px}
+  .contact{padding:96px 0 64px}
+  .contact p{color:#36424a;font-size:17px;max-width:52ch}
+  .mail{display:inline-block;margin-top:26px;font:500 clamp(24px,3.6vw,38px)/1.15 var(--display);letter-spacing:-.02em;text-decoration:none;border-bottom:3px solid var(--fibre);padding-bottom:4px;word-break:break-all}
+  .mail:hover{color:var(--fibre-ink)}
+  .contact .links{margin-top:30px}
 
-  .focus{display:flex;flex-wrap:wrap;gap:8px}
-  .focus span{border:1px solid var(--line);border-radius:6px;padding:6px 12px;font-size:14px}
+  footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:13.5px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer kbd{font:500 12px "JetBrains Mono",monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:1px 7px;background:#fff;color:var(--muted);cursor:pointer}
 
-  footer{border-top:1px solid var(--line);padding:22px 0 0;color:var(--soft);font-size:12.5px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
-  footer .uptime{color:var(--muted)}
-  footer kbd{font:500 11px "JetBrains Mono",monospace;border:1px solid var(--line);border-bottom-width:2px;border-radius:4px;padding:0 5px;color:var(--muted);cursor:pointer}
-
+  /* ---------- responsive ---------- */
   @media (max-width:980px){
-    .layout{grid-template-columns:1fr}
-    .side{position:static;height:auto;border-right:0;border-bottom:1px solid var(--line);padding:36px 24px 28px}
-    .side .navblock{display:none}
-    .content{padding:36px 24px}
+    .hero{grid-template-columns:1fr;gap:48px;padding-bottom:64px}
+    .who{padding-top:8px}
+    .rack-in{height:470px}
   }
-  @media (max-width:640px){
-    .job,.edu{grid-template-columns:1fr;gap:4px}
-    .skills{grid-template-columns:1fr}
-    .facts{grid-template-columns:1fr}
-    .fact + .fact{border-left:0;border-top:1px solid var(--line)}
+  @media (max-width:720px){
+    .wrap{padding:0 20px}
+    .job,.edu,.focus{grid-template-columns:1fr;gap:16px}
+    .skills{grid-template-columns:1fr;gap:26px}
+    section{padding:56px 0}
+    .vents{display:none}
+    .rack-in{height:430px}
   }
+
+  /* ---------- print ---------- */
   @media print{
     @page{margin:14mm}
-    body{font-size:11pt}
-    .layout{grid-template-columns:1fr}
-    .side{position:static;height:auto;background:none;border:0;padding:0 0 12px}
-    .side .navblock,.side-foot,footer kbd,#term,#matrix,#boot{display:none!important}
-    .content{padding:0;max-width:none}
-    section{break-inside:auto;padding-bottom:18px}
-    section + section{padding-top:18px}
-    .job{break-inside:avoid;padding:10px 0}
+    body{background:#fff;font-size:10.5pt}
+    .controls,.rack,footer kbd,#term,#matrix,#boot{display:none!important}
+    .hero{grid-template-columns:1fr;padding:0 0 16px}
+    .who{padding:0} h1{margin-top:12px;font-size:28pt}
+    .photo{width:80px;height:80px}
+    section{padding:18px 0}
+    .job{grid-template-columns:200px 1fr;gap:20px;padding:12px 0;break-inside:avoid}
+    .edu,.focus{grid-template-columns:200px 1fr;gap:20px}
+    .contact{padding:18px 0}
     a{text-decoration:none}
   }
 </style>
 </head>
 <body data-lang="ru">
-<div class="layout">
 
-  <aside class="side">
-    <div class="mono">АА</div>
-    <h1 class="name"><span class="ru">Арбек Аман</span><span class="en">Arbek Aman</span></h1>
-    <div class="title"><span class="ru">Системный администратор</span><span class="en">IT System Administrator</span></div>
-    <div class="sub"><span class="ru">ИТ-инфраструктура · сети · почтовая безопасность</span><span class="en">Infrastructure · networking · mail security</span></div>
+<div class="wrap">
+  <div class="controls">
+    <div class="lang" role="group" aria-label="Язык / Language">
+      <button type="button" data-l="ru" class="on">RU</button>
+      <button type="button" data-l="en">EN</button>
+    </div>
+    <button type="button" class="btn" id="printBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
+      <span class="ru">Сохранить PDF</span><span class="en">Save as PDF</span>
+    </button>
+  </div>
 
-    <div class="block">
-      <div class="label"><span class="ru">Контакты</span><span class="en">Contact</span></div>
-      <ul class="contacts">
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11a7 7 0 1 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span class="ru">Астана, Казахстан</span><span class="en">Astana, Kazakhstan</span></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><a href="mailto:arbekaman@gmail.com">arbekaman@gmail.com</a></li>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.9-1.8-2.9s-2 1.4-2 2.8V21h-4z"/></svg><a href="https://www.linkedin.com/in/arbek-aman-589204214/">LinkedIn</a></li>
-        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg><a href="https://astana.hh.kz/resume/19a8428fff08f6e84c0039ed1f33504c774746"><span class="ru">Резюме на hh.kz</span><span class="en">hh.kz resume</span></a></li>
-        <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/arbekaman">github.com/arbekaman</a></li>
-      </ul>
+  <header class="hero">
+    <div class="who">
+      <img class="photo" src="assets/photo.jpg?v=1" alt="Арбек Аман" width="112" height="112">
+      <h1><span class="ru">Арбек Аман</span><span class="en">Arbek Aman</span></h1>
+      <p class="role"><span class="ru">Системный администратор, ИТ-инфраструктура и почтовая безопасность</span><span class="en">System administrator, IT infrastructure and mail security</span></p>
+      <p class="intro ru">Пять с лишним лет держу в рабочем состоянии корпоративную инфраструктуру: Windows Server и Active Directory, периметр на FortiGate и MikroTik, почту на FortiMail, мониторинг в Zabbix. Сейчас переношу серверную группы Казахмыс с VMware на Hyper-V. Ищу задачи в инфраструктуре и DevOps, в Астане или удалённо.</p>
+      <p class="intro en">For five-plus years I have kept corporate infrastructure running: Windows Server and Active Directory, FortiGate and MikroTik at the perimeter, FortiMail for mail, Zabbix for monitoring. Right now I am moving a Kazakhmys Group server room from VMware to Hyper-V. Looking for infrastructure and DevOps work in Astana or remote.</p>
+      <div class="links">
+        <a href="mailto:arbekaman@gmail.com">arbekaman@gmail.com</a>
+        <a href="https://www.linkedin.com/in/arbek-aman-589204214/">LinkedIn</a>
+        <a href="https://astana.hh.kz/resume/19a8428fff08f6e84c0039ed1f33504c774746"><span class="ru">Резюме на hh.kz</span><span class="en">hh.kz resume</span></a>
+        <a href="https://github.com/arbekaman">GitHub</a>
+        <span class="place"><span class="ru">Астана</span><span class="en">Astana, Kazakhstan</span></span>
+      </div>
     </div>
 
-    <div class="block">
-      <div class="label"><span class="ru">Формат работы</span><span class="en">Work format</span></div>
-      <p style="font-size:14px;color:var(--muted)"><span class="ru">Полная занятость · гибрид или удалённо · готов к командировкам</span><span class="en">Full-time · hybrid or remote · open to business travel</span></p>
-    </div>
-
-    <div class="block navblock">
-      <div class="label"><span class="ru">Разделы</span><span class="en">Sections</span></div>
-      <ul class="nav">
-        <li><a href="#about"><span class="ru">Профиль</span><span class="en">Profile</span></a></li>
-        <li><a href="#experience"><span class="ru">Опыт работы</span><span class="en">Experience</span></a></li>
-        <li><a href="#skills"><span class="ru">Навыки</span><span class="en">Skills</span></a></li>
-        <li><a href="#education"><span class="ru">Образование</span><span class="en">Education</span></a></li>
-      </ul>
-    </div>
-
-    <div class="side-foot">
-      <div class="lang" role="group" aria-label="Language">
-        <button type="button" data-l="ru" class="on">RU</button>
-        <button type="button" data-l="en">EN</button>
-      </div>
-      <button type="button" class="btn" id="printBtn">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg>
-        <span class="ru">Сохранить PDF</span><span class="en">Save as PDF</span>
-      </button>
-    </div>
-  </aside>
-
-  <main class="content">
-
-    <section id="about">
-      <h2><span class="ru">Профиль</span><span class="en">Profile</span></h2>
-      <p class="lead ru">
-        Системный администратор с опытом более 5 лет. Поддерживаю и развиваю корпоративную ИТ-инфраструктуру:
-        Windows Server и Active Directory, FortiGate, FortiMail и MikroTik, мониторинг на Zabbix, антивирусная защита
-        через Kaspersky Security Center. Сейчас в группе Казахмыс веду проекты по серверной инфраструктуре.
-        Открыт к задачам в системном администрировании, ИТ-инфраструктуре и DevOps.
-      </p>
-      <p class="lead en">
-        System administrator with 5+ years of experience. I support and develop corporate IT infrastructure:
-        Windows Server and Active Directory, FortiGate, FortiMail and MikroTik, Zabbix monitoring, endpoint protection
-        with Kaspersky Security Center. Currently running server infrastructure projects at Kazakhmys Group.
-        Open to roles in system administration, IT infrastructure and DevOps.
-      </p>
-      <div class="facts">
-        <div class="fact"><b>5+</b><span class="ru">лет опыта в ИТ</span><span class="en">years in IT</span></div>
-        <div class="fact"><b>5</b><span class="ru">компаний</span><span class="en">companies</span></div>
-        <div class="fact"><b>~90</b><span class="ru">рабочих станций под управлением KSC</span><span class="en">endpoints managed in KSC</span></div>
-      </div>
-    </section>
-
-    <section id="experience">
-      <h2><span class="ru">Опыт работы</span><span class="en">Experience</span></h2>
-
-      <div class="job">
-        <div class="when"><span class="ru">сен 2026 — н.в.</span><span class="en">Sep 2026 — present</span><br><span class="badge"><span class="ru">текущее место</span><span class="en">current</span></span></div>
-        <div>
-          <div class="jhead"><div class="clogo" aria-hidden="true"><span>KB</span><img src="logos/kazakhmys-barlau.png?v=2" alt="" onerror="this.remove()"></div><div><h3><span class="ru">Главный менеджер, Департамент развития цифровых технологий</span><span class="en">Lead Manager, Digital Technology Development Dept.</span></h3>
-          <div class="co"><span class="ru">ТОО «Казахмыс Барлау», группа Казахмыс</span><span class="en">Kazakhmys Barlau LLP, Kazakhmys Group</span></div></div></div>
-          <ul class="ru">
-            <li>Обеспечиваю бесперебойную работу ИТ-инфраструктуры, сетей и корпоративного ПО.</li>
-            <li>Веду перенос серверной между площадками (Караганда → Жезказган) с миграцией ВМ с VMware ESXi на Hyper-V: схемы As-Is/To-Be, планирование СХД.</li>
-            <li>Готовлю ответы и план устранения замечаний службы информационной безопасности.</li>
-            <li>Составляю схемы сети передачи данных и серверных стоек, привожу паспорт ИТ-инфраструктуры к корпоративному формату.</li>
-            <li>Провожу аудит ИТ-систем при приёмке объектов от подрядчика.</li>
-          </ul>
-          <ul class="en">
-            <li>Keep IT infrastructure, networks and corporate software running.</li>
-            <li>Leading a server room relocation between sites (Karaganda → Zhezkazgan) with VM migration from VMware ESXi to Hyper-V: As-Is/To-Be designs, storage planning.</li>
-            <li>Preparing responses and remediation plans for information security findings.</li>
-            <li>Drawing data network and server rack diagrams; aligning the IT infrastructure passport with the corporate format.</li>
-            <li>Auditing IT systems during facility handover from contractors.</li>
-          </ul>
-          <div class="stack"><b><span class="ru">Стек:</span><span class="en">Stack:</span></b> Hyper-V, VMware ESXi, Windows Server, Active Directory, draw.io, ServiceDesk</div>
+    <figure class="rack" aria-label="Опыт работы в виде серверной стойки">
+      <div class="rack-in">
+        <div class="rail"></div>
+        <div class="bay">
+          <a class="device live" href="#job-kb" style="--m:3;--i:4">
+            <span class="tag"><img src="logos/kazakhmys-barlau.png?v=2" alt=""></span>
+            <span class="dev-text"><span class="dev-name">Kazakhmys Barlau</span><span class="dev-meta"><span class="ru">Главный менеджер ИТ, с 2026</span><span class="en">Lead IT manager, since 2026</span></span></span>
+            <span class="vents"></span><span class="led" title="в работе"></span>
+          </a>
+          <a class="device" href="#job-tm" style="--m:9;--i:3">
+            <span class="tag"><img src="logos/terra-motors.png?v=2" alt=""></span>
+            <span class="dev-text"><span class="dev-name">Terra Motors</span><span class="dev-meta"><span class="ru">Системный администратор, 9 мес.</span><span class="en">System administrator, 9 mo</span></span></span>
+            <span class="vents"></span><span class="led"></span>
+          </a>
+          <a class="device" href="#job-aa" style="--m:27;--i:2">
+            <span class="tag"><img src="logos/air-astana.png?v=2" alt=""></span>
+            <span class="dev-text"><span class="dev-name">Air Astana</span><span class="dev-meta"><span class="ru">Техподдержка, 2 г. 3 мес.</span><span class="en">IT helpdesk, 2 yr 3 mo</span></span></span>
+            <span class="vents"></span><span class="led"></span>
+          </a>
+          <a class="device" href="#job-ai" style="--m:12;--i:1">
+            <span class="tag"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 40V10h4v30"/><path d="M8 10h28"/><path d="M14 10l6-4"/><path d="M32 10v6"/><path d="M30 16h4"/><path d="M22 40V24h12v16"/><path d="M26 28h4M26 33h4"/><path d="M6 40h36"/></svg></span>
+            <span class="dev-text"><span class="dev-name">Astana Inert</span><span class="dev-meta"><span class="ru">Специалист по IT, 1 год</span><span class="en">IT specialist, 1 yr</span></span></span>
+            <span class="vents"></span><span class="led"></span>
+          </a>
+          <a class="device" href="#job-ac" style="--m:17;--i:0">
+            <span class="tag"><img src="logos/kz-choreography.png?v=2" alt=""></span>
+            <span class="dev-text"><span class="dev-name"><span class="ru">Академия хореографии</span><span class="en">Academy of Choreography</span></span><span class="dev-meta"><span class="ru">1С:Документооборот, 1 г. 5 мес.</span><span class="en">1C document flow, 1 yr 5 mo</span></span></span>
+            <span class="vents"></span><span class="led"></span>
+          </a>
         </div>
+        <div class="rail"></div>
       </div>
-
-      <div class="job">
-        <div class="when"><span class="ru">ноя 2025 — июл 2026</span><span class="en">Nov 2025 — Jul 2026</span></div>
-        <div>
-          <div class="jhead"><div class="clogo" aria-hidden="true"><span>TM</span><img src="logos/terra-motors.png?v=2" alt="" onerror="this.remove()"></div><div><h3><span class="ru">Системный администратор</span><span class="en">System Administrator</span></h3>
-          <div class="co"><span class="ru">ТОО «ГК «Terra Motors»</span><span class="en">Terra Motors Group</span></div></div></div>
-          <ul class="ru">
-            <li>Администрирование Windows Server, Active Directory, GPO и прав доступа.</li>
-            <li>Сеть и периметр на FortiGate (101F в головном офисе, 61F в филиале), FortiSwitch и MikroTik, VPN.</li>
-            <li>Корпоративная почта: диагностика доставки, SPF, DKIM, DMARC, SMTP, антиспам; FortiMail 400F: логи, blacklist/greylist, защита от spoofing и проблем репутации домена.</li>
-            <li>Kaspersky Security Center (~90 ПК), Hyper-V и виртуальные машины, резервное копирование 1С.</li>
-            <li>СКУД HikCentral, видеорегистраторы Hikvision, ИБП; подготовил предложение по NAS/SAN.</li>
-          </ul>
-          <ul class="en">
-            <li>Administered Windows Server, Active Directory, GPO and access rights.</li>
-            <li>Network and perimeter on FortiGate (101F at HQ, 61F at branch), FortiSwitch and MikroTik, VPN.</li>
-            <li>Corporate mail: delivery troubleshooting, SPF, DKIM, DMARC, SMTP, anti-spam; FortiMail 400F: logs, blacklist/greylist, spoofing and domain reputation protection.</li>
-            <li>Kaspersky Security Center (~90 endpoints), Hyper-V hosts and VMs, 1C backups.</li>
-            <li>HikCentral access control, Hikvision NVRs, UPS; prepared a NAS/SAN proposal.</li>
-          </ul>
-          <div class="ach">
-            <div class="k"><span class="ru">Результаты</span><span class="en">Results</span></div>
-            <ul class="ru">
-              <li>Внедрил централизованный мониторинг на Zabbix для серверов, сетевого оборудования и принтеров.</li>
-              <li>Усилил безопасность почты: SPF, анализ SMTP-трафика, оптимизация антиспам-политик.</li>
-              <li>Централизовал управление антивирусной защитой через Kaspersky Security Center.</li>
-              <li>Нашёл источники высокой нагрузки на интернет-каналы и устранил узкие места сети.</li>
-              <li>Стандартизировал настройку рабочих мест, что сократило повторяющиеся инциденты.</li>
-            </ul>
-            <ul class="en">
-              <li>Rolled out centralized Zabbix monitoring for servers, network gear and printers.</li>
-              <li>Hardened corporate mail: SPF, SMTP traffic analysis, tuned anti-spam policies.</li>
-              <li>Centralized endpoint protection management in Kaspersky Security Center.</li>
-              <li>Found sources of high load on internet links and removed network bottlenecks.</li>
-              <li>Standardized workstation setup, reducing repeat incidents.</li>
-            </ul>
-          </div>
-          <div class="stack"><b><span class="ru">Стек:</span><span class="en">Stack:</span></b> FortiGate, FortiMail, MikroTik, Zabbix, Kaspersky SC, Hyper-V, SPF/DKIM/DMARC</div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div class="when"><span class="ru">авг 2023 — окт 2025</span><span class="en">Aug 2023 — Oct 2025</span></div>
-        <div>
-          <div class="jhead"><div class="clogo" aria-hidden="true"><span>AA</span><img src="logos/air-astana.png?v=2" alt="" onerror="this.remove()"></div><div><h3><span class="ru">Специалист службы технической поддержки</span><span class="en">IT Helpdesk Specialist</span></h3>
-          <div class="co"><span class="ru">АО «Эйр Астана»</span><span class="en">Air Astana JSC</span></div></div></div>
-          <ul class="ru">
-            <li>Поддержка пользователей: ПК, корпоративные сервисы, учётные записи, периферия, VPN, NCALayer, AIMS/RemApp.</li>
-            <li>Service Desk: обработка и диагностика инцидентов и обращений.</li>
-            <li>Настройка рабочих станций Windows, драйверов, Office и корпоративного ПО.</li>
-            <li>Доступы через Active Directory, Outlook, файловые ресурсы и почту.</li>
-            <li>Сеть, принтеры, МФУ и сканеры, мониторинг ИБП; участие во внедрении Compass.</li>
-          </ul>
-          <ul class="en">
-            <li>User support: PCs, corporate services, accounts, peripherals, VPN, NCALayer, AIMS/RemApp.</li>
-            <li>Service Desk: incident handling and troubleshooting.</li>
-            <li>Windows workstation, driver, Office and corporate software setup.</li>
-            <li>Access management via Active Directory, Outlook, file shares and mail.</li>
-            <li>Network, printers, MFPs and scanners, UPS monitoring; took part in the Compass rollout.</li>
-          </ul>
-          <div class="ach">
-            <div class="k"><span class="ru">Результаты</span><span class="en">Results</span></div>
-            <ul class="ru">
-              <li>Настроил мониторинг 7 устройств Konica Minolta в Zabbix и собрал dashboard для быстрого выявления инцидентов.</li>
-              <li>Подготовил чек-листы стандартизации новых рабочих мест и онбординга.</li>
-              <li>Ускорил диагностику за счёт системного разбора ПК, сети, почты и периферии.</li>
-            </ul>
-            <ul class="en">
-              <li>Set up Zabbix monitoring for 7 Konica Minolta devices and built a dashboard for fast incident detection.</li>
-              <li>Wrote standardization checklists for new workstations and onboarding.</li>
-              <li>Sped up troubleshooting with a systematic look at PC, network, mail and peripherals.</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="job">
-        <div class="when"><span class="ru">сен 2022 — авг 2023</span><span class="en">Sep 2022 — Aug 2023</span></div>
-        <div>
-          <div class="jhead"><div class="clogo clogo-icon" aria-hidden="true" title="Строительство"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 40V10h4v30"/><path d="M8 10h28"/><path d="M14 10l6-4"/><path d="M32 10v6"/><path d="M30 16h4"/><path d="M22 40V24h12v16"/><path d="M26 28h4M26 33h4"/><path d="M6 40h36"/></svg></div><div><h3><span class="ru">Специалист по IT</span><span class="en">IT Specialist</span></h3>
-          <div class="co">Astana Inert Corporation</div></div></div>
-          <ul class="ru">
-            <li>Поддержка ИТ-инфраструктуры офиса и строительных объектов.</li>
-            <li>Рабочие станции, сетевое оборудование, корпоративная почта, доступы пользователей.</li>
-            <li>Видеонаблюдение и системы контроля доступа; работа с подрядчиками по интернету и технике.</li>
-            <li>Упорядочил доступы к сетевым ресурсам, сократил простои сотрудников.</li>
-          </ul>
-          <ul class="en">
-            <li>Supported IT infrastructure of the office and construction sites.</li>
-            <li>Workstations, network equipment, corporate mail, user access.</li>
-            <li>CCTV and access control; worked with ISPs and hardware vendors.</li>
-            <li>Cleaned up access to network resources and reduced employee downtime.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="job">
-        <div class="when"><span class="ru">окт 2020 — фев 2022</span><span class="en">Oct 2020 — Feb 2022</span></div>
-        <div>
-          <div class="jhead"><div class="clogo" aria-hidden="true"><span>КА</span><img src="logos/kz-choreography.png?v=2" alt="" onerror="this.remove()"></div><div><h3><span class="ru">Специалист по 1С:Документооборот</span><span class="en">1C:Document Management Specialist</span></h3>
-          <div class="co"><span class="ru">Казахская национальная академия хореографии</span><span class="en">Kazakh National Academy of Choreography</span></div></div></div>
-          <ul class="ru">
-            <li>Восстановил и запустил 1С:Документооборот практически с нуля.</li>
-            <li>Настроил интеграцию корпоративной почты с 1С для обработки входящей и исходящей корреспонденции.</li>
-            <li>Реализовал маршруты согласования, шаблонные задачи, роли и права пользователей.</li>
-            <li>Помог перевести часть внутренних процессов в электронный документооборот, писал инструкции для сотрудников.</li>
-          </ul>
-          <ul class="en">
-            <li>Restored and relaunched 1C:Document Management almost from scratch.</li>
-            <li>Integrated corporate mail with 1C for incoming and outgoing correspondence.</li>
-            <li>Built approval routes, task templates, user roles and permissions.</li>
-            <li>Helped move internal processes to electronic document flow; wrote user guides.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2><span class="ru">Навыки</span><span class="en">Skills</span></h2>
-      <div class="skills">
-        <div><h4><span class="ru">Серверы и каталог</span><span class="en">Servers &amp; directory</span></h4><p><span class="adv">Active Directory</span>, <span class="adv">Group Policy</span>, Windows Server 2019/2022, DNS, DHCP</p></div>
-        <div><h4><span class="ru">Почта и почтовая безопасность</span><span class="en">Mail &amp; mail security</span></h4><p><span class="adv">FortiMail</span>, <span class="adv">Anti-Spam</span>, <span class="adv">Mail Troubleshooting</span>, SPF, DKIM, DMARC, SMTP</p></div>
-        <div><h4><span class="ru">Сети</span><span class="en">Networking</span></h4><p>FortiGate, FortiSwitch, MikroTik, Zyxel, VPN, NAT, Firewall</p></div>
-        <div><h4><span class="ru">Безопасность</span><span class="en">Security</span></h4><p>Kaspersky Security Center, MITRE ATT&amp;CK, IoC, EDR, Windows Event ID</p></div>
-        <div><h4><span class="ru">Виртуализация и Linux</span><span class="en">Virtualization &amp; Linux</span></h4><p>Hyper-V, VMware ESXi, vCenter, NAS/SAN, CentOS, Red Hat, Nginx</p></div>
-        <div><h4><span class="ru">Мониторинг</span><span class="en">Monitoring</span></h4><p>Zabbix, Grafana</p></div>
-        <div><h4><span class="ru">Процессы и сервис</span><span class="en">Processes &amp; service</span></h4><p><span class="adv">Service Desk</span>, <span class="adv">Incident Management</span>, ITIL, Jira, Confluence, ServiceDesk Plus</p></div>
-        <div><h4><span class="ru">Базы данных и скрипты</span><span class="en">Databases &amp; scripting</span></h4><p>SQL, PostgreSQL, MySQL, PowerShell, Python</p></div>
-      </div>
-      <p class="note"><span class="ru">Выделены навыки продвинутого уровня.</span><span class="en">Highlighted: advanced level.</span></p>
-    </section>
-
-    <section id="education">
-      <h2><span class="ru">Образование и сертификаты</span><span class="en">Education &amp; certificates</span></h2>
-      <div class="edu">
-        <div class="when">2019 — 2022</div>
-        <div><h3>Astana IT University</h3><p><span class="ru">Бакалавриат, Big Data Analytics</span><span class="en">Bachelor's degree, Big Data Analytics</span></p></div>
-      </div>
-      <div class="edu">
-        <div class="when">2026</div>
-        <div><h3><span class="ru">Сертификат квалификации</span><span class="en">Qualification certificate</span></h3><p><span class="ru">ООО «Грин-АПИ»</span><span class="en">Green-API</span></p></div>
-      </div>
-      <div class="edu">
-        <div class="when">2021</div>
-        <div><h3>Linux Essentials</h3><p>Operating Systems</p></div>
-      </div>
-      <div class="edu">
-        <div class="when">2021</div>
-        <div><h3><span class="ru">Алгоритмы: теория и практика. Структуры данных</span><span class="en">Algorithms: Theory and Practice. Data Structures</span></h3><p>Stepik</p></div>
-      </div>
-
-      <div style="margin-top:34px">
-        <div class="label"><span class="ru">Направления развития</span><span class="en">Areas of interest</span></div>
-        <div class="focus ru"><span>Системное администрирование</span><span>ИТ-инфраструктура</span><span>DevOps</span><span>Информационная безопасность</span></div>
-        <div class="focus en"><span>System administration</span><span>IT infrastructure</span><span>DevOps</span><span>Information security</span></div>
-      </div>
-    </section>
-
-    <footer>
-      <span>© 2026 Arbek Aman · <span class="ru">в ИТ с октября 2020:</span><span class="en">in IT since Oct 2020:</span> <span class="uptime" id="uptime"></span></span>
-      <span><kbd data-open-term title="terminal">~</kbd></span>
-    </footer>
-  </main>
+      <figcaption class="rack-cap">
+        <span><b><span class="ru">Стаж по местам работы</span><span class="en">Tenure by employer</span></b></span>
+        <span class="legend"><span><i class="on"></i><span class="ru">сейчас</span><span class="en">current</span></span><span><i></i><span class="ru">раньше</span><span class="en">past</span></span></span>
+      </figcaption>
+    </figure>
+  </header>
 </div>
+
+<main class="wrap">
+
+  <section id="experience" style="border-top:1px solid var(--line)">
+    <h2><span class="ru">Опыт работы</span><span class="en">Experience</span></h2>
+
+    <article class="job" id="job-kb">
+      <div class="org">
+        <span class="tag"><img src="logos/kazakhmys-barlau.png?v=2" alt="Kazakhmys Barlau"></span>
+        <div>
+          <div class="org-name"><span class="ru">ТОО «Казахмыс Барлау», группа Казахмыс</span><span class="en">Kazakhmys Barlau LLP, Kazakhmys Group</span></div>
+          <div class="org-when"><span class="ru">Сентябрь 2026 — сейчас</span><span class="en">September 2026 — present</span></div>
+          <div class="now"><i></i><span class="ru">Текущее место</span><span class="en">Current role</span></div>
+        </div>
+      </div>
+      <div>
+        <h3><span class="ru">Главный менеджер, Департамент развития цифровых технологий</span><span class="en">Lead manager, Digital Technology Development Department</span></h3>
+        <ul class="ru">
+          <li>Отвечаю за бесперебойную работу ИТ-инфраструктуры, сетей и корпоративного ПО.</li>
+          <li>Веду перенос серверной между площадками (Караганда → Жезказган) с миграцией виртуальных машин с VMware ESXi на Hyper-V: схемы As-Is/To-Be, планирование СХД.</li>
+          <li>Готовлю ответы и план устранения замечаний службы информационной безопасности.</li>
+          <li>Составляю схемы сети передачи данных и серверных стоек, привожу паспорт ИТ-инфраструктуры к корпоративному формату.</li>
+          <li>Провожу аудит ИТ-систем при приёмке объектов от подрядчика.</li>
+        </ul>
+        <ul class="en">
+          <li>Keep IT infrastructure, networks and corporate software running.</li>
+          <li>Leading a server room relocation between sites (Karaganda → Zhezkazgan) with VM migration from VMware ESXi to Hyper-V: As-Is/To-Be designs, storage planning.</li>
+          <li>Preparing responses and remediation plans for information security findings.</li>
+          <li>Drawing data network and server rack diagrams; aligning the IT infrastructure passport with the corporate format.</li>
+          <li>Auditing IT systems during facility handover from contractors.</li>
+        </ul>
+        <p class="stack"><span class="ru">Инструменты:</span><span class="en">Tools:</span> Hyper-V, VMware ESXi, Windows Server, Active Directory, draw.io, ServiceDesk</p>
+      </div>
+    </article>
+
+    <article class="job" id="job-tm">
+      <div class="org">
+        <span class="tag"><img src="logos/terra-motors.png?v=2" alt="Terra Motors"></span>
+        <div>
+          <div class="org-name"><span class="ru">ТОО «ГК «Terra Motors»</span><span class="en">Terra Motors Group</span></div>
+          <div class="org-when"><span class="ru">Ноябрь 2025 — июль 2026</span><span class="en">November 2025 — July 2026</span></div>
+        </div>
+      </div>
+      <div>
+        <h3><span class="ru">Системный администратор</span><span class="en">System administrator</span></h3>
+        <ul class="ru">
+          <li>Администрировал Windows Server, Active Directory, групповые политики и права доступа.</li>
+          <li>Вёл сеть и периметр: FortiGate 101F в головном офисе и 61F в филиале, FortiSwitch, MikroTik, VPN.</li>
+          <li>Сопровождал корпоративную почту: доставка писем, SPF, DKIM, DMARC, SMTP, антиспам. На FortiMail 400F разбирал логи, вёл blacklist и greylist, защищал домен от спуфинга и проблем с репутацией.</li>
+          <li>Kaspersky Security Center на ~90 рабочих станций, Hyper-V и виртуальные машины, резервное копирование 1С.</li>
+          <li>СКУД HikCentral, видеорегистраторы Hikvision, ИБП; подготовил предложение по NAS/SAN.</li>
+        </ul>
+        <ul class="en">
+          <li>Administered Windows Server, Active Directory, Group Policy and access rights.</li>
+          <li>Ran the network and perimeter: FortiGate 101F at HQ and 61F at the branch, FortiSwitch, MikroTik, VPN.</li>
+          <li>Supported corporate mail: delivery, SPF, DKIM, DMARC, SMTP, anti-spam. On FortiMail 400F: log analysis, blacklist and greylist, protecting the domain from spoofing and reputation issues.</li>
+          <li>Kaspersky Security Center for ~90 workstations, Hyper-V hosts and VMs, 1C backups.</li>
+          <li>HikCentral access control, Hikvision NVRs, UPS; prepared a NAS/SAN proposal.</li>
+        </ul>
+        <div class="res">
+          <h4><span class="ru">Результаты</span><span class="en">Results</span></h4>
+          <ul class="ru">
+            <li>Внедрил централизованный мониторинг на Zabbix для серверов, сетевого оборудования и принтеров.</li>
+            <li>Усилил защиту почты: SPF, анализ SMTP-трафика, настройка антиспам-политик.</li>
+            <li>Централизовал управление антивирусной защитой через Kaspersky Security Center.</li>
+            <li>Нашёл источники высокой нагрузки на интернет-каналы и убрал узкие места сети.</li>
+            <li>Стандартизировал настройку рабочих мест, повторяющихся инцидентов стало меньше.</li>
+          </ul>
+          <ul class="en">
+            <li>Rolled out centralized Zabbix monitoring for servers, network gear and printers.</li>
+            <li>Hardened corporate mail: SPF, SMTP traffic analysis, tuned anti-spam policies.</li>
+            <li>Centralized endpoint protection management in Kaspersky Security Center.</li>
+            <li>Found sources of high load on internet links and removed network bottlenecks.</li>
+            <li>Standardized workstation setup, which cut repeat incidents.</li>
+          </ul>
+        </div>
+        <p class="stack"><span class="ru">Инструменты:</span><span class="en">Tools:</span> FortiGate, FortiMail, MikroTik, Zabbix, Kaspersky Security Center, Hyper-V</p>
+      </div>
+    </article>
+
+    <article class="job" id="job-aa">
+      <div class="org">
+        <span class="tag"><img src="logos/air-astana.png?v=2" alt="Air Astana"></span>
+        <div>
+          <div class="org-name"><span class="ru">АО «Эйр Астана»</span><span class="en">Air Astana JSC</span></div>
+          <div class="org-when"><span class="ru">Август 2023 — октябрь 2025</span><span class="en">August 2023 — October 2025</span></div>
+        </div>
+      </div>
+      <div>
+        <h3><span class="ru">Специалист службы технической поддержки</span><span class="en">IT helpdesk specialist</span></h3>
+        <ul class="ru">
+          <li>Поддерживал пользователей: ПК, корпоративные сервисы, учётные записи, периферия, VPN, NCALayer, AIMS/RemApp.</li>
+          <li>Обрабатывал и диагностировал инциденты и обращения в Service Desk.</li>
+          <li>Настраивал рабочие станции Windows, драйверы, Office и корпоративное ПО.</li>
+          <li>Выдавал доступы через Active Directory, Outlook, файловые ресурсы и почту.</li>
+          <li>Сеть, принтеры, МФУ и сканеры, мониторинг ИБП; участвовал во внедрении Compass.</li>
+        </ul>
+        <ul class="en">
+          <li>Supported users: PCs, corporate services, accounts, peripherals, VPN, NCALayer, AIMS/RemApp.</li>
+          <li>Handled and diagnosed incidents and requests in Service Desk.</li>
+          <li>Set up Windows workstations, drivers, Office and corporate software.</li>
+          <li>Managed access via Active Directory, Outlook, file shares and mail.</li>
+          <li>Network, printers, MFPs and scanners, UPS monitoring; took part in the Compass rollout.</li>
+        </ul>
+        <div class="res">
+          <h4><span class="ru">Результаты</span><span class="en">Results</span></h4>
+          <ul class="ru">
+            <li>Настроил мониторинг 7 устройств Konica Minolta в Zabbix и собрал dashboard, по которому инциденты видно сразу.</li>
+            <li>Подготовил чек-листы для стандартной настройки новых рабочих мест и онбординга.</li>
+            <li>Ускорил диагностику за счёт последовательного разбора: ПК, сеть, почта, периферия.</li>
+          </ul>
+          <ul class="en">
+            <li>Set up Zabbix monitoring for 7 Konica Minolta devices and built a dashboard that shows incidents at a glance.</li>
+            <li>Wrote checklists for standard workstation setup and onboarding.</li>
+            <li>Sped up troubleshooting with a step-by-step check: PC, network, mail, peripherals.</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+
+    <article class="job" id="job-ai">
+      <div class="org">
+        <span class="tag"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 40V10h4v30"/><path d="M8 10h28"/><path d="M14 10l6-4"/><path d="M32 10v6"/><path d="M30 16h4"/><path d="M22 40V24h12v16"/><path d="M26 28h4M26 33h4"/><path d="M6 40h36"/></svg></span>
+        <div>
+          <div class="org-name">Astana Inert Corporation</div>
+          <div class="org-when"><span class="ru">Сентябрь 2022 — август 2023</span><span class="en">September 2022 — August 2023</span></div>
+        </div>
+      </div>
+      <div>
+        <h3><span class="ru">Специалист по IT</span><span class="en">IT specialist</span></h3>
+        <ul class="ru">
+          <li>Поддерживал ИТ-инфраструктуру офиса и строительных объектов.</li>
+          <li>Рабочие станции, сетевое оборудование, корпоративная почта, доступы пользователей.</li>
+          <li>Видеонаблюдение и системы контроля доступа; работа с подрядчиками по интернету и технике.</li>
+          <li>Навёл порядок в доступах к сетевым ресурсам, сократил простои сотрудников.</li>
+        </ul>
+        <ul class="en">
+          <li>Supported IT infrastructure of the office and construction sites.</li>
+          <li>Workstations, network equipment, corporate mail, user access.</li>
+          <li>CCTV and access control; worked with ISPs and hardware vendors.</li>
+          <li>Cleaned up access to network resources and reduced employee downtime.</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job" id="job-ac">
+      <div class="org">
+        <span class="tag"><img src="logos/kz-choreography.png?v=2" alt="Kazakh National Academy of Choreography"></span>
+        <div>
+          <div class="org-name"><span class="ru">Казахская национальная академия хореографии</span><span class="en">Kazakh National Academy of Choreography</span></div>
+          <div class="org-when"><span class="ru">Октябрь 2020 — февраль 2022</span><span class="en">October 2020 — February 2022</span></div>
+        </div>
+      </div>
+      <div>
+        <h3><span class="ru">Специалист по 1С:Документооборот</span><span class="en">1C:Document Management specialist</span></h3>
+        <ul class="ru">
+          <li>Восстановил и запустил 1С:Документооборот практически с нуля.</li>
+          <li>Связал корпоративную почту с 1С, чтобы входящие и исходящие письма обрабатывались в системе.</li>
+          <li>Настроил маршруты согласования, шаблонные задачи, роли и права пользователей.</li>
+          <li>Помог перевести часть внутренних процессов в электронный документооборот, написал инструкции для сотрудников.</li>
+        </ul>
+        <ul class="en">
+          <li>Restored and relaunched 1C:Document Management almost from scratch.</li>
+          <li>Connected corporate mail to 1C so incoming and outgoing letters are processed in the system.</li>
+          <li>Built approval routes, task templates, user roles and permissions.</li>
+          <li>Helped move internal processes to electronic document flow; wrote user guides.</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="skills">
+    <h2><span class="ru">Навыки</span><span class="en">Skills</span></h2>
+    <div class="skills">
+      <div><h3><span class="ru">Серверы и каталог</span><span class="en">Servers and directory</span></h3><p><span class="adv">Active Directory</span>, <span class="adv">Group Policy</span>, Windows Server 2019/2022, DNS, DHCP</p></div>
+      <div><h3><span class="ru">Почта и её защита</span><span class="en">Mail and mail security</span></h3><p><span class="adv">FortiMail</span>, <span class="adv"><span class="ru">антиспам</span><span class="en">anti-spam</span></span>, <span class="adv"><span class="ru">диагностика доставки</span><span class="en">delivery troubleshooting</span></span>, SPF, DKIM, DMARC, SMTP</p></div>
+      <div><h3><span class="ru">Сети</span><span class="en">Networking</span></h3><p>FortiGate, FortiSwitch, MikroTik, Zyxel, VPN, NAT, Firewall</p></div>
+      <div><h3><span class="ru">Безопасность</span><span class="en">Security</span></h3><p>Kaspersky Security Center, MITRE ATT&amp;CK, IoC, EDR, Windows Event ID</p></div>
+      <div><h3><span class="ru">Виртуализация и Linux</span><span class="en">Virtualization and Linux</span></h3><p>Hyper-V, VMware ESXi, vCenter, NAS/SAN, CentOS, Red Hat, Nginx</p></div>
+      <div><h3><span class="ru">Мониторинг</span><span class="en">Monitoring</span></h3><p>Zabbix, Grafana</p></div>
+      <div><h3><span class="ru">Процессы</span><span class="en">Service management</span></h3><p><span class="adv">Service Desk</span>, <span class="adv"><span class="ru">управление инцидентами</span><span class="en">incident management</span></span>, ITIL, Jira, Confluence, ServiceDesk Plus</p></div>
+      <div><h3><span class="ru">Базы данных и скрипты</span><span class="en">Databases and scripting</span></h3><p>SQL, PostgreSQL, MySQL, PowerShell, Python</p></div>
+    </div>
+    <p class="note"><span class="ru">Подчёркнуто то, что на hh.kz отмечено продвинутым уровнем.</span><span class="en">Underlined: marked as advanced level on hh.kz.</span></p>
+  </section>
+
+  <section id="education">
+    <h2><span class="ru">Образование</span><span class="en">Education</span></h2>
+    <div class="edu"><div class="y">2019 — 2022</div><div><h3>Astana IT University</h3><p><span class="ru">Бакалавриат, Big Data Analytics</span><span class="en">Bachelor's degree, Big Data Analytics</span></p></div></div>
+    <div class="edu"><div class="y">2026</div><div><h3><span class="ru">Сертификат квалификации</span><span class="en">Qualification certificate</span></h3><p><span class="ru">ООО «Грин-АПИ»</span><span class="en">Green-API</span></p></div></div>
+    <div class="edu"><div class="y">2021</div><div><h3>Linux Essentials</h3><p>Operating Systems</p></div></div>
+    <div class="edu"><div class="y">2021</div><div><h3><span class="ru">Алгоритмы: теория и практика. Структуры данных</span><span class="en">Algorithms: theory and practice. Data structures</span></h3><p>Stepik</p></div></div>
+    <div class="focus">
+      <h3><span class="ru">Куда расту</span><span class="en">Where I am heading</span></h3>
+      <p><span class="ru">Системное администрирование, ИТ-инфраструктура, DevOps и информационная безопасность.</span><span class="en">System administration, IT infrastructure, DevOps and information security.</span></p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2><span class="ru">Связаться</span><span class="en">Get in touch</span></h2>
+    <p class="ru">Рассматриваю полную занятость: в офисе в Астане, гибрид или удалённо. Готов к командировкам.</p>
+    <p class="en">Open to full-time roles: on-site in Astana, hybrid or remote. Ready to travel.</p>
+    <a class="mail" href="mailto:arbekaman@gmail.com">arbekaman@gmail.com</a>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/arbek-aman-589204214/">LinkedIn</a>
+      <a href="https://astana.hh.kz/resume/19a8428fff08f6e84c0039ed1f33504c774746"><span class="ru">Резюме на hh.kz</span><span class="en">hh.kz resume</span></a>
+      <a href="https://github.com/arbekaman">GitHub</a>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Arbek Aman. <span class="ru">В ИТ с октября 2020:</span><span class="en">In IT since October 2020:</span> <span class="uptime" id="uptime"></span></span>
+    <span><kbd data-open-term title="Терминал">~</kbd></span>
+  </footer>
+</main>
 
 <script>
   (function(){
@@ -401,17 +478,7 @@
     var saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch(e) {}
     if (saved === 'en' || saved === 'ru') setLang(saved);
-
     document.getElementById('printBtn').addEventListener('click', function(){ try { window.print(); } catch(e) {} });
-
-    /* active section in sidebar nav */
-    var links = document.querySelectorAll('.nav a');
-    if ('IntersectionObserver' in window){
-      var io = new IntersectionObserver(function(es){
-        es.forEach(function(e){ if (e.isIntersecting){ links.forEach(function(a){ a.classList.toggle('active', a.getAttribute('href') === '#'+e.target.id); }); } });
-      }, {rootMargin:'-30% 0px -60% 0px'});
-      document.querySelectorAll('main section').forEach(function(s){ io.observe(s); });
-    }
   })();
 </script>
 <style>
