@@ -42,10 +42,14 @@
 
   /* ---------- controls ---------- */
   .controls{display:flex;justify-content:flex-end;gap:10px;padding:22px 0 0}
-  .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff}
+  .lang{position:relative;display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff;isolation:isolate}
+  .lang-thumb{position:absolute;top:3px;bottom:3px;left:0;width:0;border-radius:999px;background:var(--ink);z-index:-1;
+    transition:transform .32s cubic-bezier(.3,.8,.25,1), width .32s cubic-bezier(.3,.8,.25,1)}
+  .lang.no-anim .lang-thumb{transition:none}
   .lang button{border:0;background:none;font:500 13px var(--text);color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer}
-  .lang button.on{background:var(--ink);color:#fff}
-  .btn{text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;font:500 13px var(--text);color:var(--ink);cursor:pointer}
+  .lang button{transition:color .25s ease}
+  .lang button.on{color:#fff}
+  .btn{text-decoration:none;min-width:226px;justify-content:center;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;font:500 13px var(--text);color:var(--ink);cursor:pointer}
   .btn:hover{border-color:var(--fibre-ink);color:var(--fibre-ink)}
   .btn svg{width:15px;height:15px}
 
@@ -157,6 +161,8 @@
   }
   @media (max-width:720px){
     .wrap{padding:0 20px}
+    .btn{min-width:0}
+    .controls{flex-wrap:wrap}
     .job,.edu,.focus{grid-template-columns:1fr;gap:16px}
     .skills{grid-template-columns:1fr;gap:26px}
     section{padding:56px 0}
@@ -165,6 +171,9 @@
   }
 
   .print-qr{display:none}
+  .swap{transition:opacity .18s ease}
+  body.lang-out .swap{opacity:0}
+  @media (prefers-reduced-motion: reduce){ .lang-thumb,.swap,.lang button{transition:none} }
   /* ---------- print ---------- */
   @media print{
     @page{size:A4;margin:10mm 12mm}
@@ -221,7 +230,8 @@
 
 <div class="wrap">
   <div class="controls">
-    <div class="lang" role="group" aria-label="Язык / Тіл / Language">
+    <div class="lang no-anim" role="group" aria-label="Язык / Тіл / Language">
+      <span class="lang-thumb" aria-hidden="true"></span>
       <button type="button" data-l="ru" class="on">RU</button>
       <button type="button" data-l="kk">KZ</button>
       <button type="button" data-l="en">EN</button>
@@ -240,7 +250,7 @@
     </a>
   </div>
 
-  <header class="hero">
+  <header class="hero swap">
     <div class="who">
       <div class="print-qr" aria-hidden="true"><img src="assets/qr.svg" alt=""><span>arbekaman.github.io</span></div>
       <img class="photo" src="assets/photo.jpg?v=1" alt="Арбек Аман" width="112" height="112">
@@ -297,7 +307,7 @@
   </header>
 </div>
 
-<main class="wrap">
+<main class="wrap swap">
 
   <section id="experience" style="border-top:1px solid var(--line)">
     <h2><span class="ru">Опыт работы</span><span class="en">Experience</span><span class="kk">Жұмыс тәжірибесі</span></h2>
@@ -552,18 +562,62 @@
 
 <script>
   (function(){
-    var btns = document.querySelectorAll('.lang button');
-    function setLang(l){
+    var group = document.querySelector('.lang');
+    var thumb = group.querySelector('.lang-thumb');
+    var btns = group.querySelectorAll('button');
+    var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var busy = false;
+
+    function moveThumb(l){
+      var b = group.querySelector('button[data-l="'+l+'"]');
+      if (!b) return;
+      thumb.style.width = b.offsetWidth + 'px';
+      thumb.style.transform = 'translateX(' + b.offsetLeft + 'px)';
+    }
+    function apply(l){
       document.body.setAttribute('data-lang', l);
       document.documentElement.lang = l;
       document.title = l === 'en' ? 'Arbek Aman · Resume' : (l === 'kk' ? 'Арбек Аман · Түйіндеме' : 'Арбек Аман · Резюме');
-      btns.forEach(function(b){ b.classList.toggle('on', b.dataset.l === l); });
+      btns.forEach(function(b){ b.classList.toggle('on', b.dataset.l === l); b.setAttribute('aria-pressed', b.dataset.l === l); });
       try { localStorage.setItem('cv-lang', l); } catch(e) {}
+      if (window.__onLang) window.__onLang(l);
+    }
+    // элемент, который сейчас у верхнего края экрана: после смены языка возвращаем его на то же место
+    function anchor(){
+      // только элементы, которые есть во всех языковых версиях (не .ru/.en/.kk)
+      var els = document.querySelectorAll('.who, .rack, h2, .job, .org, .job h3, .res, .stack, .skills > div, .note, .edu, .focus, .mail, footer');
+      var fallback = null;
+      for (var i = 0; i < els.length; i++){
+        var r = els[i].getBoundingClientRect();
+        if (r.height === 0) continue;
+        if (r.top >= 0) return {el: els[i], top: r.top};
+        if (r.bottom > 0) fallback = {el: els[i], top: r.top};
+      }
+      return fallback;
+    }
+    function jump(dy){ if (Math.abs(dy) < 1) return; window.scrollTo({top: window.scrollY + dy, behavior: 'instant'}); }
+    function setLang(l){
+      if (busy || document.body.getAttribute('data-lang') === l) return;
+      moveThumb(l);
+      if (reduce){ var a0 = anchor(); apply(l); if (a0) jump(a0.el.getBoundingClientRect().top - a0.top); return; }
+      busy = true;
+      document.body.classList.add('lang-out');
+      setTimeout(function(){
+        var a = anchor();
+        apply(l);
+        if (a) jump(a.el.getBoundingClientRect().top - a.top);
+        requestAnimationFrame(function(){ document.body.classList.remove('lang-out'); busy = false; });
+      }, 180);
     }
     btns.forEach(function(b){ b.addEventListener('click', function(){ setLang(b.dataset.l); }); });
+
     var saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch(e) {}
-    if (saved === 'en' || saved === 'ru' || saved === 'kk') setLang(saved);
+    if (saved === 'en' || saved === 'ru' || saved === 'kk') apply(saved);
+    moveThumb(document.body.getAttribute('data-lang') || 'ru');
+    function settle(){ moveThumb(document.body.getAttribute('data-lang') || 'ru'); requestAnimationFrame(function(){ group.classList.remove('no-anim'); }); }
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(settle); else settle();
+    window.addEventListener('resize', function(){ group.classList.add('no-anim'); moveThumb(document.body.getAttribute('data-lang') || 'ru'); requestAnimationFrame(function(){ group.classList.remove('no-anim'); }); });
   })();
 </script>
 <style>
@@ -654,7 +708,7 @@
     var el = document.getElementById('uptime'); if (el) el.textContent = uptimeStr();
   }
   paintUptime(); setInterval(paintUptime, 60000);
-  document.querySelectorAll('.lang button').forEach(function(b){ b.addEventListener('click', function(){ setTimeout(function(){ paintUptime(); renderChips(); },0); }); });
+  window.__onLang = function(){ paintUptime(); renderChips(); };
 
   /* ---------- boot screen ---------- */
   var boot = document.getElementById('boot'), log = document.getElementById('bootlog');
@@ -840,7 +894,7 @@
     if (!cmd) return;
     hist.push(cmd); hi = hist.length;
     var lc = cmd.toLowerCase();
-    if (/^lang (ru|en)$/.test(lc)){
+    if (/^lang (ru|en|kk)$/.test(lc)){
       var l = lc.slice(5); var btn = document.querySelector('.lang button[data-l="'+l+'"]'); if (btn) btn.click();
       setTimeout(function(){ print('<span class="g">'+T('Язык: русский','Language: English')+'</span>'); renderChips(); }, 10);
       return;
