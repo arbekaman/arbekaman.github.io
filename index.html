@@ -28,12 +28,13 @@
     --plate-hi:#39444A;
     --led:#3DDC84;
     --accent:var(--fibre-ink);
-    --display:"Unbounded",system-ui,sans-serif;
-    --text:"Golos Text",system-ui,sans-serif;
+    --display:"Unbounded","Inter Display",system-ui,sans-serif;
+    --text:"Golos Text","Inter",system-ui,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
-  body{font-family:var(--text);font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+  body{font-family:var(--text);font-size:16px;line-height:1.6;color:var(--ink);background:var(--paper);-webkit-font-smoothing:antialiased}
+  .org-when,.edu .y,.dev-meta{font-variant-numeric:tabular-nums}
   body[data-lang="ru"] .en, body[data-lang="en"] .ru{display:none !important}
   a{color:inherit}
   :focus-visible{outline:2px solid var(--fibre-ink);outline-offset:3px;border-radius:3px}
@@ -44,7 +45,7 @@
   .lang{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:#fff}
   .lang button{border:0;background:none;font:500 13px var(--text);color:var(--muted);padding:5px 12px;border-radius:999px;cursor:pointer}
   .lang button.on{background:var(--ink);color:#fff}
-  .btn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;font:500 13px var(--text);color:var(--ink);cursor:pointer}
+  .btn{text-decoration:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;font:500 13px var(--text);color:var(--ink);cursor:pointer}
   .btn:hover{border-color:var(--fibre-ink);color:var(--fibre-ink)}
   .btn svg{width:15px;height:15px}
 
@@ -163,18 +164,50 @@
     .rack-in{height:430px}
   }
 
+  .print-qr{display:none}
   /* ---------- print ---------- */
   @media print{
-    @page{margin:14mm}
-    body{background:#fff;font-size:10.5pt}
-    .controls,.rack,footer kbd,#term,#matrix,#boot{display:none!important}
-    .hero{grid-template-columns:1fr;padding:0 0 16px}
-    .who{padding:0} h1{margin-top:12px;font-size:28pt}
-    .photo{width:80px;height:80px}
-    section{padding:18px 0}
-    .job{grid-template-columns:200px 1fr;gap:20px;padding:12px 0;break-inside:avoid}
-    .edu,.focus{grid-template-columns:200px 1fr;gap:20px}
-    .contact{padding:18px 0}
+    @page{size:A4;margin:10mm 12mm}
+    body{background:#fff;font-size:9pt;line-height:1.38}
+    .wrap{padding:0;max-width:none}
+    .controls,.rack,footer,#contact,#term,#matrix,#boot{display:none!important}
+    .hero{display:block;padding:0 0 10px}
+    .who{padding:0;position:relative;display:grid;grid-template-columns:62px 1fr;column-gap:14px;padding-right:110px}
+    .photo{width:62px;height:62px;border-radius:10px;grid-row:1/3}
+    h1{margin-top:0;font-size:21pt;align-self:end}
+    .role{margin-top:2px;font-size:10.5pt}
+    .intro{grid-column:1/-1;font-size:9.4pt;margin-top:10px;max-width:none;line-height:1.45}
+    .links{grid-column:1/-1;margin-top:8px;font-size:9pt;gap:4px 16px}
+    .print-qr{display:flex;flex-direction:column;align-items:center;gap:1px;position:absolute;top:0;right:0;font-size:7pt;color:var(--muted)}
+    .print-qr img{width:78px;height:78px}
+    section{padding:8px 0}
+    section + section{border-top:1px solid var(--line)}
+    #experience{border-top:1px solid var(--line)!important}
+    h2{font-size:12.5pt;margin-bottom:6px}
+    .job{grid-template-columns:150px 1fr;gap:16px;padding:6px 0}
+    .job:first-of-type{padding-top:2px}
+    .org{gap:8px}
+    .org .tag{width:28px;height:28px;border-radius:5px}
+    .org .tag img{width:24px;height:24px}
+    .org .tag svg{width:18px;height:18px}
+    .org-name{font-size:8.6pt;line-height:1.3}
+    .org-when{font-size:8pt;margin-top:1px}
+    .now{font-size:8pt;margin-top:3px}
+    .job h3{font-size:10pt;line-height:1.3;max-width:none}
+    .job ul{margin-top:4px;max-width:none;padding-left:14px}
+    .job li{margin:1px 0}
+    .res{margin-top:5px} .res h4{font-size:9pt} .res ul{margin-top:2px}
+    .stack{margin-top:5px;font-size:8.4pt;max-width:none}
+    .skills{gap:6px 28px}
+    .skills h3{font-size:9.2pt;margin-bottom:1px}
+    .skills p{max-width:none;font-size:8.8pt}
+    .adv{text-underline-offset:2px;text-decoration-thickness:1.5px}
+    .note{margin-top:6px;font-size:8pt}
+    .edu,.focus{grid-template-columns:150px 1fr;gap:16px;padding:3px 0}
+    .edu h3,.focus h3{font-size:9.2pt} .edu p{font-size:8.6pt} .focus p{max-width:none}
+    .focus{margin-top:6px}
+    h2,h3,h4{break-after:avoid}
+    .job li,.org{break-inside:avoid}
     a{text-decoration:none}
   }
 </style>
@@ -187,14 +220,19 @@
       <button type="button" data-l="ru" class="on">RU</button>
       <button type="button" data-l="en">EN</button>
     </div>
-    <button type="button" class="btn" id="printBtn">
+    <a class="btn ru" href="resume-ru.pdf" download="Arbek_Aman_resume_RU.pdf">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
-      <span class="ru">Сохранить PDF</span><span class="en">Save as PDF</span>
-    </button>
+      Скачать резюме PDF
+    </a>
+    <a class="btn en" href="resume-en.pdf" download="Arbek_Aman_resume_EN.pdf">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v11m0 0l-4-4m4 4l4-4M5 20h14"/></svg>
+      Download resume PDF
+    </a>
   </div>
 
   <header class="hero">
     <div class="who">
+      <div class="print-qr" aria-hidden="true"><img src="assets/qr.svg" alt=""><span>arbekaman.github.io</span></div>
       <img class="photo" src="assets/photo.jpg?v=1" alt="Арбек Аман" width="112" height="112">
       <h1><span class="ru">Арбек Аман</span><span class="en">Arbek Aman</span></h1>
       <p class="role"><span class="ru">Системный администратор, ИТ-инфраструктура и почтовая безопасность</span><span class="en">System administrator, IT infrastructure and mail security</span></p>
@@ -478,7 +516,6 @@
     var saved = null;
     try { saved = localStorage.getItem('cv-lang'); } catch(e) {}
     if (saved === 'en' || saved === 'ru') setLang(saved);
-    document.getElementById('printBtn').addEventListener('click', function(){ try { window.print(); } catch(e) {} });
   })();
 </script>
 <style>
