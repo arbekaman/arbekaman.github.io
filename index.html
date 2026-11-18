@@ -125,6 +125,7 @@
   .job ul{margin-top:12px;padding-left:20px;max-width:68ch;color:#2f3a41}
   .job li{margin:6px 0;padding-left:2px}
   .job li::marker{color:var(--fibre)}
+  .job li b{font-weight:600;color:var(--ink)}
   .res{margin-top:20px}
   .res h4{font:600 15px var(--text);color:var(--fibre-ink)}
   .res ul{margin-top:6px}
@@ -193,7 +194,9 @@
     section + section{border-top:1px solid var(--line)}
     #experience{border-top:1px solid var(--line)!important}
     h2{font-size:12.5pt;margin-bottom:6px}
-    .job{grid-template-columns:150px 1fr;gap:16px;padding:6px 0}
+    .job{display:block;position:relative;padding:6px 0 6px 166px}
+    .job .org{position:absolute;left:0;top:6px;width:150px}
+    .job:first-of-type .org{top:2px}
     .job:first-of-type{padding-top:2px}
     .org{gap:8px}
     .org .tag{width:28px;height:28px;border-radius:5px}
@@ -216,13 +219,19 @@
     .edu h3,.focus h3{font-size:9.2pt} .edu p{font-size:8.6pt} .focus p{max-width:none}
     .focus{margin-top:6px}
     h2,h3,h4{break-after:avoid}
-    .job li,.org{break-inside:avoid}
+    .job li{break-inside:avoid}
     a{text-decoration:none}
+    .skills{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px 18px}
+    .skills p{font-size:8.4pt;line-height:1.35}
+    #education{display:grid;grid-template-columns:1fr 1fr;column-gap:24px}
+    #education h2{grid-column:1/-1}
+    .edu{grid-template-columns:70px 1fr;gap:8px}
+    .focus{display:none}
     body[data-lang="kk"]{font-size:8.75pt;line-height:1.36}
     body[data-lang="kk"] section{padding:5px 0}
     body[data-lang="kk"] .skills{gap:3px 28px}
     body[data-lang="kk"] .edu{padding:1px 0}
-    body[data-lang="kk"] .job{padding:5px 0}
+    body[data-lang="kk"] .job{padding-top:5px;padding-bottom:5px}
   }
 </style>
 </head>
@@ -325,25 +334,37 @@
         <h3><span class="ru">Главный менеджер, Департамент развития цифровых технологий</span><span class="en">Lead manager, Digital Technology Development Department</span><span class="kk">Бас менеджер, Цифрлық технологияларды дамыту департаменті</span></h3>
         <ul class="ru">
           <li>Отвечаю за бесперебойную работу ИТ-инфраструктуры, сетей и корпоративного ПО.</li>
-          <li>Веду перенос серверной между площадками (Караганда → Жезказган) с миграцией виртуальных машин с VMware ESXi на Hyper-V: схемы As-Is/To-Be, планирование СХД.</li>
-          <li>Готовлю ответы и план устранения замечаний службы информационной безопасности.</li>
-          <li>Составляю схемы сети передачи данных и серверных стоек, привожу паспорт ИТ-инфраструктуры к корпоративному формату.</li>
-          <li>Провожу аудит ИТ-систем при приёмке объектов от подрядчика.</li>
+          <li><b>Переезд серверной.</b> Веду перенос серверной инфраструктуры из Караганды в Жезказган: около 21 ТБ данных и переход виртуальных машин с VMware ESXi на Hyper-V. Готовлю схемы As-Is/To-Be, пошаговый план миграции и оценку простоя по каждой ВМ, чтобы файловый сервер переехал с минимальным перерывом в работе.</li>
+          <li><b>Новая площадка.</b> Готовлю серверную в Жезказгане: три сервера на Windows Server 2022 Datacenter, СХД HPE MSA и ленточная библиотека. Планирую схему резервного копирования и RAID.</li>
+          <li><b>Безопасность.</b> Закрываю замечания службы защиты информации: усилил настройки VMware ESXi (парольная политика, NTP, таймауты сессий, удаление неактуальных учётных записей), готовлю ответы для реестра несоответствий.</li>
+          <li><b>Доступы.</b> Перевожу доступ к файловому серверу на группы безопасности AD: на каждую папку отдельные группы на чтение и на запись вместо прав конкретным пользователям.</li>
+          <li><b>Схемы сети.</b> Составляю единую схему сети передачи данных между площадками в Астане, Караганде и Жезказгане: каналы операторов, межплощадочные VPN, ключевое оборудование. Рисую схемы серверных стоек в draw.io.</li>
+          <li><b>Паспорт инфраструктуры.</b> Привожу паспорт ИТ-инфраструктуры к формату Корпорации по серверным платформам.</li>
+          <li><b>Приёмка объекта.</b> Провожу аудит ИТ- и инженерных систем нового производственного комплекса в Жезказгане (учебный центр, ремонтно-механический цех, котельная, серверная): сверяю проект с фактически установленным оборудованием.</li>
+          <li>Оформляю заявки и технические обоснования в корпоративном ServiceDesk, в том числе на привилегированный доступ к серверам.</li>
         </ul>
         <ul class="en">
           <li>Keep IT infrastructure, networks and corporate software running.</li>
-          <li>Leading a server room relocation between sites (Karaganda → Zhezkazgan) with VM migration from VMware ESXi to Hyper-V: As-Is/To-Be designs, storage planning.</li>
-          <li>Preparing responses and remediation plans for information security findings.</li>
-          <li>Drawing data network and server rack diagrams; aligning the IT infrastructure passport with the corporate format.</li>
-          <li>Auditing IT systems during facility handover from contractors.</li>
+          <li><b>Server room move.</b> Leading the relocation from Karaganda to Zhezkazgan: about 21 TB of data and a switch of virtual machines from VMware ESXi to Hyper-V. Preparing As-Is/To-Be designs, a step-by-step migration plan and a downtime estimate for each VM, so the file server moves with minimal interruption.</li>
+          <li><b>New site.</b> Building the Zhezkazgan server room: three servers on Windows Server 2022 Datacenter, HPE MSA storage and a tape library. Planning the backup scheme and RAID layout.</li>
+          <li><b>Security.</b> Closing information security findings: hardened VMware ESXi (password policy, NTP, session timeouts, removal of stale accounts) and preparing responses for the nonconformity register.</li>
+          <li><b>Access.</b> Moving file server permissions to AD security groups: a read group and a write group per folder instead of rights for individual users.</li>
+          <li><b>Network diagrams.</b> Drawing a single data network diagram across sites in Astana, Karaganda and Zhezkazgan: carrier links, site-to-site VPNs, key equipment. Server rack diagrams in draw.io.</li>
+          <li><b>Infrastructure passport.</b> Bringing the IT infrastructure passport in line with the corporate format for server platforms.</li>
+          <li><b>Facility handover.</b> Auditing IT and engineering systems of a new production complex in Zhezkazgan (training centre, repair shop, boiler house, server room): checking the design against what is actually installed.</li>
+          <li>Writing requests and technical justifications in the corporate ServiceDesk, including privileged access to servers.</li>
         </ul><ul class="kk">
           <li>IT-инфрақұрылымның, желілердің және корпоративтік бағдарламалық қамтамасыз етудің үздіксіз жұмысына жауаптымын.</li>
-          <li>Серверлік бөлмені алаңдар арасында көшіруді жүргіземін (Қарағанды → Жезқазған), виртуалды машиналарды VMware ESXi-ден Hyper-V-ге ауыстырамын: As-Is/To-Be схемалары, деректерді сақтау жүйесін жоспарлау.</li>
-          <li>Ақпараттық қауіпсіздік қызметінің ескертулеріне жауаптар мен оларды жою жоспарын дайындаймын.</li>
-          <li>Деректер беру желісінің және серверлік стойкалардың схемаларын жасаймын, IT-инфрақұрылым паспортын корпоративтік форматқа келтіремін.</li>
-          <li>Мердігерден объектілерді қабылдау кезінде IT-жүйелерге аудит жүргіземін.</li>
+          <li><b>Серверлік бөлмені көшіру.</b> Серверлік инфрақұрылымды Қарағандыдан Жезқазғанға көшіруді жүргіземін: шамамен 21 ТБ деректер және виртуалды машиналарды VMware ESXi-ден Hyper-V-ге ауыстыру. Файлдық сервер жұмысқа барынша аз кедергімен көшуі үшін As-Is/To-Be схемаларын, көшірудің қадамдық жоспарын және әр ВМ бойынша тоқтап тұру уақытының бағасын дайындаймын.</li>
+          <li><b>Жаңа алаң.</b> Жезқазғандағы серверлік бөлмені дайындаймын: Windows Server 2022 Datacenter жүйесіндегі үш сервер, HPE MSA деректер сақтау жүйелері және таспалы кітапхана. Резервтік көшіру мен RAID схемасын жоспарлаймын.</li>
+          <li><b>Қауіпсіздік.</b> Ақпаратты қорғау қызметінің ескертулерін жабамын: VMware ESXi баптауларын күшейттім (құпиясөз саясаты, NTP, сессия таймауттары, өзекті емес есептік жазбаларды жою), сәйкессіздіктер тізіліміне жауаптар дайындаймын.</li>
+          <li><b>Қол жеткізу.</b> Файлдық серверге қол жеткізуді AD қауіпсіздік топтарына көшіремін: жеке пайдаланушыларға құқық берудің орнына әр қалтаға оқуға және жазуға арналған бөлек топтар.</li>
+          <li><b>Желі схемалары.</b> Астана, Қарағанды және Жезқазған алаңдары арасындағы деректер беру желісінің бірыңғай схемасын жасаймын: операторлар арналары, алаңаралық VPN, негізгі жабдық. Серверлік стойкалардың схемаларын draw.io-да саламын.</li>
+          <li><b>Инфрақұрылым паспорты.</b> IT-инфрақұрылым паспортын серверлік платформалар бойынша Корпорацияның форматына келтіремін.</li>
+          <li><b>Объектіні қабылдау.</b> Жезқазғандағы жаңа өндірістік кешеннің IT және инженерлік жүйелеріне аудит жүргіземін (оқу орталығы, жөндеу-механикалық цех, қазандық, серверлік): жобаны іс жүзінде орнатылған жабдықпен салыстырамын.</li>
+          <li>Корпоративтік ServiceDesk-те өтінімдер мен техникалық негіздемелерді, соның ішінде серверлерге артықшылықты қол жеткізуге, рәсімдеймін.</li>
         </ul>
-        <p class="stack"><span class="ru">Инструменты:</span><span class="en">Tools:</span><span class="kk">Құралдар:</span> Hyper-V, VMware ESXi, Windows Server, Active Directory, draw.io, ServiceDesk</p>
+        <p class="stack"><span class="ru">Инструменты:</span><span class="en">Tools:</span><span class="kk">Құралдар:</span> Hyper-V, VMware ESXi, Windows Server 2022, Active Directory, Veeam, HPE MSA, draw.io, ServiceDesk</p>
       </div>
     </article>
 
